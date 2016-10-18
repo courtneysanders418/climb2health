@@ -3,7 +3,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('posts', (table) => {
         table.increments();
-        table.string('username').notNullable().defaultTo('');
+        table.integer('user_id').references('users.id').notNullable();
         table.string('title').notNullable().defaultTo('');
         table.text('content').notNullable().defaultTo('');
         table.text('image_url').notNullable().defaultTo('');

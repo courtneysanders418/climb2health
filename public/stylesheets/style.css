@@ -1,8 +1,26 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.nav-wrapper {
+    background-color: #424242;
+    font-family: 'Londrina Solid', cursive;
 }
 
-a {
-  color: #00B7FF;
+#logIn {
+    background: #424242;
+    width: 400px;
+    opacity: .7;
+    font-family: 'Londrina Solid', cursive;
+    font-size: 20px;
+}
+#getStarted {
+  width: 400px;
+  background-color: #880e4f;
+  font-family: 'Londrina Solid', cursive;
+  font-size: 25px;
+}
+
+.parallax-container {
+    text-align: center;
+}
+#logo {
+  height: 200px;
+  width: 350px;
 }

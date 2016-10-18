@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
+const bcrypt = require('bcrypt-as-promised');
 
 router.get('/', (_req, res, next) => {
     knex('users')
@@ -32,12 +33,18 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    knex('users')
-        .insert({
-            name: req.body.name
-        }, '*')
+    bcrypt.hash(req.body.password, 12)
+        .then((hashed_password) => {
+            return knex('users')
+                .insert({
+                    email: req.body.email,
+                    hashed_password: hashed_password
+                }, '*');
+        })
         .then((users) => {
-            res.send(users[0]);
+            const user = users[0];
+            delete user.hashed_password;
+            res.send(user);
         })
         .catch((err) => {
             next(err);
