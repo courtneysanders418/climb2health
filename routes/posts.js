@@ -4,56 +4,74 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 
-router.get('/', (_req, res, next) => {
+router.get('/', (req, res, next) => {
     knex('posts')
-        .orderBy('id')
+        // .join('users', 'users.id', 'posts.user_id')
+        .orderBy('posts.id')
         .then((posts) => {
-            res.render('posts',{posts: posts});
+          console.log('id', posts);
+            res.render('posts', {
+                posts: posts
+            });
         })
         .catch((err) => {
             next(err);
         });
 });
 
+router.get('/new', (req, res) => {
+            res.render('new')
+});
+
+
 router.get('/:id', (req, res, next) => {
-    knex('post')
+    knex('posts')
         .where('id', req.params.id)
         .first()
         .then((post) => {
             if (!post) {
                 return next();
             }
-
-            res.send(post);
+            res.render('post', {
+              post: post
+            })
         })
         .catch((err) => {
             next(err);
         });
 });
 
-router.post('/', (req, res, next) => {
-    knex('users')
-        .where('id', req.body.artist_id)
+
+router.get('/:id/edit', (req, res, next) => {
+    knex('posts')
+        .where('id', req.params.id)
         .first()
-        .then((user) => {
-            if (!user) {
-                const err = new Error('username does not exist');
-
-                err.status = 400;
-
-                throw err;
+        .then((post) => {
+            if (!post) {
+                return next();
             }
-
-            return knex('posts')
-                .insert({
-                    username: req.body.username,
-                    title: req.body.title,
-                    content: req.body.content,
-                    image_url: req.body.image_url
-                }, '*');
+            res.render('edit', {
+              post: post
+            })
         })
-        .then((posts) => {
-            res.send(posts[0]);
+        .catch((err) => {
+            next(err);
+        });
+});
+
+
+
+router.post('/', (req, res, next) => {
+  console.log('posted to the blog');
+    knex('posts')
+        .insert({
+            user_id: req.session.userInfo.id,
+            title: req.body.title,
+            content: req.body.content,
+            image_url: req.body.image_url
+        }, '*')
+    .then((posts) => {
+            res.redirect('/posts');
         })
         .catch((err) => {
             next(err);
@@ -61,6 +79,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.patch('/:id', (req, res, next) => {
+  console.log(req.body);
     knex('posts')
         .where('id', req.params.id)
         .first()
@@ -68,9 +87,8 @@ router.patch('/:id', (req, res, next) => {
             if (!post) {
                 return next();
             }
-
             return knex('users')
-                .where('id', req.body.username)
+                .where('id', req.body.user_id)
                 .first();
         })
         .then((user) => {
@@ -84,7 +102,7 @@ router.patch('/:id', (req, res, next) => {
 
             return knex('posts')
                 .update({
-                    username: req.body.username,
+                    title: req.body.title,
                     content: req.body.content,
                     image_url: req.body.image_url
                 }, '*')
@@ -117,7 +135,7 @@ router.delete('/:id', (req, res, next) => {
         })
         .then(() => {
             delete post.id;
-            res.send(post);
+            res.send('This item has been deleted');
         })
         .catch((err) => {
             next(err);

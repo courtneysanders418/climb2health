@@ -1,0 +1,30 @@
+
+<div class="row" id="postCard">
+    <div class="col s6 m5 card medium">
+        <div>
+            <form class="col s12" >
+              <input type="text" name="name" value="{{post.user_id}}" id="user_id" hidden>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Title" id="title" type="text" value="{{post.title}}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Content" id="content" type="text"  value="{{post.content}}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Image url" id="image_url" type="text"  value="{{post.image_url}}">
+                    </div>
+                </div>
+
+
+                <button class="btn waves-effect waves-light" id="edit-post-btn" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <a class="waves-effect waves-light btn light-blue darken-3" href="/posts">Cancel</a>
+            </form>

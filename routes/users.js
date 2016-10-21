@@ -24,7 +24,6 @@ router.get('/:id', (req, res, next) => {
             if (!user) {
                 return next();
             }
-
             res.send(user);
         })
         .catch((err) => {
@@ -59,7 +58,6 @@ router.patch('/:id', (req, res, next) => {
             if (!user) {
                 return next();
             }
-
             return knex('users')
                 .update({
                     name: req.body.name
@@ -87,7 +85,7 @@ router.delete('/:id', (req, res, next) => {
 
             user = row;
 
-            return knex('user')
+            return knex('users')
                 .del()
                 .where('id', req.params.id);
         })

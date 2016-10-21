@@ -1,13 +1,22 @@
-<div class="">
+<div class="container align-right" id="createButton">
+    <a href="/posts/new"><i class="material-icons">create</i></a> Create New Post
+</div>
+<hr>
+<div class="posts">
     {{#each posts}}
-
-    <h3>{{title}}</h3>
-    <p>
-      User Id: {{user_id}}
-    </p>
-    <p>
-        {{content}}
-    </p>
-    <img src="{{image_url}}" alt="" />
+    <div class="">
+        <p>
+            {{username}}
+        </p>
+        <div id="image_div">
+            <img src="{{image_url}}" alt="" / id="post_image">
+        </div>
+        <h3>{{title}}</h3>
+        <p id="content">
+            {{content}}
+<a class="btn-floating btn-large waves-effect waves-light pink darken-4" href="posts/{{id}}"><i class="material-icons">settings</i></a>
+        </p>
+</div>
     {{/each}}
+
 </div>

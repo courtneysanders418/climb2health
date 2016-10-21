@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.string('last_name').notNullable().defaultTo('')
         table.string('username').notNullable().defaultTo('');
         table.string('email').unique().notNullable();
-        table.specificType('hashed_password', 'char(60)').notNullable();
+        table.text('hashed_password').notNullable();
         table.timestamps(true, true);
     });
 };
