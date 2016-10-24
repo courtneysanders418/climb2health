@@ -1,22 +1,21 @@
-<div class="container align-right" id="createButton">
+<div class="container" id="createButton">
     <a href="/posts/new"><i class="material-icons">create</i></a> Create New Post
 </div>
 <hr>
-<div class="posts">
-    {{#each posts}}
-    <div class="">
-        <p>
-            {{username}}
-        </p>
-        <div id="image_div">
-            <img src="{{image_url}}" alt="" / id="post_image">
-        </div>
-        <h3>{{title}}</h3>
-        <p id="content">
-            {{content}}
-<a class="btn-floating btn-large waves-effect waves-light pink darken-4" href="posts/{{id}}"><i class="material-icons">settings</i></a>
-        </p>
+{{#each posts}}
+<div class="posts row">
+
+            <div class="col s3" id="image_div">
+                <img src="{{image_url}}" alt="" / id="post_image">
+            </div>
+            <div class="col s9">
+                <h2>{{title}}</h2>
+                <p id="content">
+                    {{content}}
+
+                </p>
+            </div>
+
+<a id="settings"class="btn-floating btn-large waves-effect waves-light pink darken-4" href="posts/{{id}}"><i class="material-icons">settings</i></a>
 </div>
     {{/each}}
-
-</div>

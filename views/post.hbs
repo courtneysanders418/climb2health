@@ -10,18 +10,14 @@
             <a class="btn-floating btn-large waves-effect waves-light light-blue darken-3" href="/posts"><i class="material-icons">cancel</i></a>
         </div>
 
-        <div class="posts">
-
-                <hr>
-                <p>
-                    {{post.username}}
-                </p>
-                <div id="image_div">
-                    <img src="{{post.image_url}}" alt="" / id="post_image">
-                </div>
-                <h3>{{post.title}}</h3>
-
-                <p id="content">
-                    {{post.content}}
-                </p>
-        </div>
+        <div class="row center" id="postDiv">
+             <div class="col s12 m5">
+               <div class="card-panel">
+                     <img src="{{post.image_url}}" alt="" / id="post_image">
+                 <h3>{{post.title}}</h3>
+                 <p id="content">
+                     {{post.content}}
+                 </p>
+               </div>
+             </div>
+           </div>

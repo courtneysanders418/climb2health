@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session')
-
+var favicon = require('favicon');
 var app = express();
 
 if (process.env.NODE_ENV !== 'production') {
