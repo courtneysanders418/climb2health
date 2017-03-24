@@ -44,8 +44,17 @@ body {
     float: right;
 }
 
+.createPost {
+    position: absolute;
+    right: -136px;
+    top: -20px;
+}
+
 #createButton {
     text-align: right;
+    position: relative;
+    right: -73px;
+    bottom: -6px;
 }
 
 p {
